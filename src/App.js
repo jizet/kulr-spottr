@@ -3,9 +3,10 @@ import logo from './logo.svg';
 import './App.css';
 import styled from 'styled-components'
 import {  BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Highscore, Main} from './containers'
+import { Highscore } from './containers'
 import { Provider } from 'react-redux'
 import createStore from './redux'
+import Main from './containers/main'
 import Board from './containers/board'
 import { Navbar } from 'react-bootstrap';
 

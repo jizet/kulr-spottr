@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { Button } from 'react-bootstrap'
 import Tile from '../components/tile'
+import BoardActions from '../redux/BoardRedux'
+import { getRandomColor } from '../util/index'
 
 const Container = styled.div`
   display: flex;
@@ -21,21 +23,27 @@ const Container = styled.div`
 class Board extends React.Component {
   constructor(props){
     super(props);
-    this.createArray=this.createArray.bind(this);
+    this.generateBoard=this.generateBoard.bind(this);
   }
-  createArray () {
+  generateBoard () {
+    const color = getRandomColor()
     const aux = []
-    for (let i = 0; i < Math.pow(this.props.currentLevel,2); i++) {
-        aux.push(<Tile key={i} />)
+    aux.push(<Tile key={0} winner={true} color={color}/>)
+    for (let i = 1; i < Math.pow(this.props.currentLevel,2); i++) {
+        aux.push(<Tile key={i} color={color} />)
     }
+    aux.sort((a, b) => (0.5 - Math.random()))
     return aux
   }
 
   render () {
     return (
-      <Container amount={this.props.currentLevel}>
-        {this.createArray()}
-      </Container>
+      <div>
+        <Button onClick={this.props.levelUp}>Level Up</Button>
+        <Container amount={this.props.currentLevel}>
+          {this.generateBoard()}
+        </Container>
+      </div>
     )
   }
 }
@@ -47,7 +55,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    levelUp: () => dispatch(BoardActions.levelUp())
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board)

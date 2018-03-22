@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+import BoardActions from '../redux/BoardRedux'
 
 const Container = styled.div`
-  background: tomato;
+  background: ${props => props.color}!important;
   width: 100px;
   height: 100px;
   margin: 2px;
@@ -13,14 +15,32 @@ const Container = styled.div`
   font-weight: bold;
   font-size: 3em;
   text-align: center;
+  opacity: ${props => props.winner ? '0.5' : '1'}
 `
 
 class Tile extends Component {
   render () {
     return (
-      <Container />
+      <Container 
+        onClick={this.props.winner ? this.props.levelUp : this.props.finishGame} 
+        color={this.props.color}
+        winner={this.props.winner}
+      />
     )
   }
 }
 
-export default Tile
+const mapStateToProps = (state) => {
+  return {
+    currentLevel: state.board.currentLevel
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    levelUp: () => dispatch(BoardActions.levelUp()),
+    finishGame: () => dispatch(BoardActions.finishGame())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tile)

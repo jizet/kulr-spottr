@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 import { Button } from 'react-bootstrap'
 import { Elevation1 } from '../core/components'
+import BoardActions from '../redux/BoardRedux'
+import { NavLink } from '../util/index'
 
 const Container = styled.div`
   height: 100%;
@@ -19,12 +22,29 @@ const MyButton = styled(Button)`
   text-align: center;
 `
 
-export const Main = () => {
-  return (
-    <Container>
-      <ButtonContainer>
-        <MyButton bsStyle="primary">Primary</MyButton>
-      </ButtonContainer>
-    </Container>
-  )
+class Main extends React.Component {
+  render () {
+    return (
+      <Container>
+        <ButtonContainer>
+          <NavLink to={'/board'}>
+            <MyButton onClick={this.props.startGame} bsStyle="primary">Start Game</MyButton>
+          </NavLink>
+        </ButtonContainer>
+      </Container>
+    )
+  }
 }
+
+const mapStateToProps = (state) => {
+  return {
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    startGame: () => dispatch(BoardActions.startGame())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main)

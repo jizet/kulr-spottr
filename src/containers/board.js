@@ -39,10 +39,10 @@ class Board extends React.Component {
   render () {
     return (
       <div>
-        <Button onClick={this.props.levelUp}>Level Up</Button>
-        <Container amount={this.props.currentLevel}>
+        {/* <Button onClick={this.props.levelUp}>Level Up</Button> */}
+        {this.props.playing && <Container amount={this.props.currentLevel}>
           {this.generateBoard()}
-        </Container>
+        </Container>}
       </div>
     )
   }
@@ -50,7 +50,8 @@ class Board extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentLevel: state.board.currentLevel
+    currentLevel: state.board.currentLevel,
+    playing: state.board.playing
   }
 }
 

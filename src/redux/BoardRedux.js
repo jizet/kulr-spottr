@@ -1,5 +1,6 @@
 import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
+import { isNil, isEmpty } from 'ramda'
 
 /* ------------- Types and Action Creators ------------- */
 const { Types, Creators } = createActions({
@@ -22,15 +23,15 @@ export const INITIAL_STATE = Immutable({
 function inc (x) { return x + 1 }
 
 export const startGame = (state) => {
-  return state.set('currentLevel', 1).set('gameStatus', 'playing')
+  return isNil(state) || isEmpty(state) ? INITIAL_STATE : state.set('currentLevel', 1).set('gameStatus', 'playing')
 }
 
 export const levelUp = (state) => {
-  return state.update('currentLevel', inc)
+  return isNil(state) || isEmpty(state) ? INITIAL_STATE : state.update('currentLevel', inc)
 }
 
 export const finishGame = (state) => {
-  return state.set('gameStatus', 'finished')
+  return isNil(state) || isEmpty(state) ? INITIAL_STATE : state.set('gameStatus', 'finished')
 }
 
 /* ------------- Hookup Reducers To Types ------------- */

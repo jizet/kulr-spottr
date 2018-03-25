@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import BoardActions from '../redux/BoardRedux'
+import { getSortedPlayers } from '../redux/Selectors/index'
 import { Button } from 'react-bootstrap'
 import { NavLink } from '../util/index'
 import { connect } from 'react-redux'
@@ -48,7 +49,7 @@ class Highscore extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    players: state.ranking.players
+    players: getSortedPlayers(state)
   }
 }
 

@@ -17,10 +17,7 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Reducers ------------- */
 
 export const addPlayer = (state, {stats}) => {
-  // return [stats].concat(state.players).sort((a, b) => (b.level - a.level))
-  const a = state.merge({players: state.players.concat([stats])})
-  const b = [].concat(a.players).sort((c, b) => (b.level - c.level))
-  return b
+  return state.merge({players: state.players.concat([stats])})
 }
 
 /* ------------- Hookup Reducers To Types ------------- */

@@ -1,4 +1,3 @@
-import { createSelector } from 'reselect'
 import styled from 'styled-components'
 import * as ReactRouterDOM from 'react-router-dom'
 
@@ -16,6 +15,7 @@ export const gameStatuses = {
 const rand = (min, max) => {
   return min + Math.random() * (max - min)
 }
+
 export const getRandomColor = () => {
   let h = rand(1, 360);
   let s = rand(0, 60);

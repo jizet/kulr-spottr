@@ -4,7 +4,6 @@ import BoardActions from '../redux/BoardRedux'
 import { Button } from 'react-bootstrap'
 import { NavLink } from '../util/index'
 import { connect } from 'react-redux'
-import { equals, isEmpty, isNil } from 'ramda'
 
 const Container = styled.div`
   display: flex;

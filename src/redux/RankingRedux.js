@@ -20,9 +20,7 @@ export const addPlayer = (state, {stats}) => {
   // return [stats].concat(state.players).sort((a, b) => (b.level - a.level))
   const a = state.merge({players: state.players.concat([stats])})
   const b = [].concat(a.players).sort((c, b) => (b.level - c.level))
-  console.log(b)
-  console.log('adentro', b[0])
-  return a
+  return b
 }
 
 /* ------------- Hookup Reducers To Types ------------- */

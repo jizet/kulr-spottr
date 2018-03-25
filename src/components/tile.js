@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types';
+import BoardActions from '../redux/BoardRedux'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import BoardActions from '../redux/BoardRedux'
 
 const Container = styled.div`
   background: ${props => props.color}!important;
@@ -44,3 +45,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tile)
+
+Tile.propTypes = {
+  winner: PropTypes.bool,
+  color: PropTypes.string
+}

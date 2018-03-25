@@ -20,18 +20,32 @@ const Container = styled.div`
 const MyButton = styled(Button)`
   margin-left: auto;
   margin-right: auto;
+  margin-top: 10px;
   text-align: center;
 `
-
-const Player = styled.div`
+const Title = styled.h1`
+  font-family: 'Montserrat', 'Helvetica', sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 32px;
+  text-decoration: underline;
+  line-height: 40px;
+`
+const Player = styled.h1`
   display: flex;
   flex-direction: row;
+  font-family: 'Montserrat', 'Helvetica', sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 32px;
+  line-height: 40px;
 `
 
 class Highscore extends React.Component {
   render () {
     return (
       <Container>
+        <Title>HALL OF FAME</Title>
           {
             this.props.players.map((player, index) => (
               <Player key={index}>
@@ -40,7 +54,7 @@ class Highscore extends React.Component {
             ))
           }
           <NavLink to={'/board'}>
-            <MyButton onClick={this.props.startGame} bsStyle="primary">Start Game</MyButton>
+            <MyButton onClick={this.props.startGame} bsStyle="primary">Play Again!</MyButton>
           </NavLink>
       </Container>
     )

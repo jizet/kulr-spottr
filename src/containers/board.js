@@ -22,6 +22,14 @@ const Container = styled.div`
   width: 100%;
 `
 
+const LevelContainer = styled.h1`
+  font-family: 'Montserrat', 'Helvetica', sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 32px;
+  line-height: 40px;
+`
+
 class Board extends React.Component {
   constructor(props){
     super(props);
@@ -65,9 +73,15 @@ class Board extends React.Component {
           </div>
         }
         {equals(this.props.gameStatus, gameStatuses.finished) && <Button onClick={this.props.startGame}>Play Again</Button>}
-        {equals(this.props.gameStatus, gameStatuses.playing) && <Container amount={this.props.currentLevel}>
-          {this.generateBoard()}
-        </Container>}
+        {equals(this.props.gameStatus, gameStatuses.playing) && 
+        <div>
+          <LevelContainer>
+            Your level is: {this.props.currentLevel} !
+          </LevelContainer>
+          <Container amount={this.props.currentLevel}>
+            {this.generateBoard()}
+          </Container>
+        </div>}
       </div>
     )
   }

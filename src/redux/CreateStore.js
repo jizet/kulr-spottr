@@ -7,7 +7,7 @@ export default (rootReducer) => {
 
 	enchancers.push(applyMiddleware(...middleware))
 
-	const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(
+	const store = createStore(rootReducer, composeEnhancers(
 		applyMiddleware(...middleware)
 	));
 

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import BoardActions from '../redux/BoardRedux'
 import { getSortedPlayers } from '../redux/Selectors/index'
 import { Button } from 'react-bootstrap'
-import { NavLink } from '../util/index'
+import { NavLink } from '../core/components'
 import { connect } from 'react-redux'
 
 const Container = styled.div`

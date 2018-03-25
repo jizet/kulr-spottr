@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { Button } from 'react-bootstrap'
 import BoardActions from '../redux/BoardRedux'
-import { NavLink } from '../util/index'
+import { NavLink } from '../core/components/link'
 
 const Container = styled.div`
   height: 100%;

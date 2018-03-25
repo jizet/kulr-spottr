@@ -5,7 +5,8 @@ import BoardActions from '../redux/BoardRedux'
 import RankingActions from '../redux/RankingRedux'
 import { connect } from 'react-redux'
 import { Button } from 'react-bootstrap'
-import { getRandomColor, gameStatuses, NavLink } from '../util/index'
+import { NavLink } from '../core/components'
+import { getRandomColor, gameStatuses } from '../core/util'
 import { equals } from 'ramda'
 
 const Container = styled.div`

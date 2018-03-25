@@ -1,5 +1,6 @@
 import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
+import { isNil, isEmpty } from 'ramda'
 
 /* ------------- Types and Action Creators ------------- */
 const { Types, Creators } = createActions({
@@ -17,7 +18,7 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Reducers ------------- */
 
 export const addPlayer = (state, {stats}) => {
-  return state.merge({players: state.players.concat([stats])})
+  return isNil(state) || isEmpty(state) ? INITIAL_STATE : state.merge({players: state.players.concat([stats])})
 }
 
 /* ------------- Hookup Reducers To Types ------------- */

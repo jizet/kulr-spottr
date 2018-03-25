@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components'
-import { connect } from 'react-redux'
-import { Button } from 'react-bootstrap'
 import Tile from '../components/tile'
 import BoardActions from '../redux/BoardRedux'
-import { getRandomColor } from '../util/index'
+import RankingActions from '../redux/RankingRedux'
+import { connect } from 'react-redux'
+import { Button } from 'react-bootstrap'
+import { getRandomColor, gameStatuses, NavLink } from '../util/index'
+import { equals } from 'ramda'
 
 const Container = styled.div`
   display: flex;
@@ -23,24 +25,47 @@ const Container = styled.div`
 class Board extends React.Component {
   constructor(props){
     super(props);
-    this.generateBoard=this.generateBoard.bind(this);
+    this.state = {value: ''}
+    this.handleChange = this.handleChange.bind(this)
+    this.generateBoard = this.generateBoard.bind(this)
+    this.addPlayerToRanking = this.addPlayerToRanking.bind(this)
   }
+
   generateBoard () {
     const color = getRandomColor()
-    const aux = []
-    aux.push(<Tile key={0} winner={true} color={color}/>)
+    const board = []
+    board.push(<Tile key={0} winner={true} color={color}/>)
     for (let i = 1; i < Math.pow(this.props.currentLevel,2); i++) {
-        aux.push(<Tile key={i} color={color} />)
+        board.push(<Tile key={i} color={color} />)
     }
-    aux.sort((a, b) => (0.5 - Math.random()))
-    return aux
+    board.sort((a, b) => (0.5 - Math.random()))
+    return board
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  addPlayerToRanking() {
+    this.props.addPlayer({name: this.state.value, level: this.props.currentLevel})
+    this.setState({value: ''});
   }
 
   render () {
     return (
       <div>
-        {/* <Button onClick={this.props.levelUp}>Level Up</Button> */}
-        {this.props.playing && <Container amount={this.props.currentLevel}>
+        {
+          equals(this.props.gameStatus, gameStatuses.finished) &&
+          <div>
+            Player Name:
+            <input type="text" value={this.state.value} onChange={this.handleChange} />
+            <NavLink to='/highscore'>
+              <Button onClick={this.addPlayerToRanking}>Submit name</Button>
+            </NavLink>
+          </div>
+        }
+        {equals(this.props.gameStatus, gameStatuses.finished) && <Button onClick={this.props.startGame}>Play Again</Button>}
+        {equals(this.props.gameStatus, gameStatuses.playing) && <Container amount={this.props.currentLevel}>
           {this.generateBoard()}
         </Container>}
       </div>
@@ -51,13 +76,14 @@ class Board extends React.Component {
 const mapStateToProps = (state) => {
   return {
     currentLevel: state.board.currentLevel,
-    playing: state.board.playing
+    gameStatus: state.board.gameStatus
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    levelUp: () => dispatch(BoardActions.levelUp())
+    startGame: () => dispatch(BoardActions.startGame()),
+    addPlayer: (playerStats) => dispatch(RankingActions.addPlayer(playerStats))
   }
 }
 

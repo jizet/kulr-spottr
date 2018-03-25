@@ -7,6 +7,12 @@ export const NavLink = styled(ReactRouterDOM.NavLink)`
   text-decoration: inherit;
 `
 
+export const gameStatuses = {
+  waiting: 'waiting',
+  playing: 'playing',
+  finished: 'finished'
+}
+
 const rand = (min, max) => {
   return min + Math.random() * (max - min)
 }

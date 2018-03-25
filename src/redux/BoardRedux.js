@@ -15,14 +15,14 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   currentLevel: 0,
-  playing: false
+  gameStatus: 'waiting'
 })
 /* ------------- Reducers ------------- */
 
 function inc (x) { return x + 1 }
 
 export const startGame = (state) => {
-  return state.set('currentLevel', 1).set('playing', true)
+  return state.set('currentLevel', 1).set('gameStatus', 'playing')
 }
 
 export const levelUp = (state) => {
@@ -30,7 +30,7 @@ export const levelUp = (state) => {
 }
 
 export const finishGame = (state) => {
-  return state.set('currentLevel', 0).set('playing', false)
+  return state.set('gameStatus', 'finished')
 }
 
 /* ------------- Hookup Reducers To Types ------------- */

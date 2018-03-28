@@ -11,9 +11,6 @@ const Container = styled.div`
 `
 
 const MyButton = styled(Button)`
-  margin: 0 auto;
-  margin-left: auto;
-  margin-right: auto;
   text-align: center;
 `
 

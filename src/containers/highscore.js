@@ -11,9 +11,7 @@ const Container = styled.div`
   flex-direction: column;
   flex-wrap: no-wrap;
   height: 100%;
-
-  padding: 0;
-  margin: auto;
+  widht: 100%;
   margin-top: 5%;
 `
 
@@ -41,21 +39,33 @@ const Player = styled.h1`
   line-height: 40px;
 `
 
+const PlayerContainer = styled.div`
+  display: flex;
+  margin: 6px 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-height: 40px;
+`
+
 class Highscore extends React.Component {
   render () {
     return (
       <Container>
+        <NavLink to={'/board'}>
+          <MyButton onClick={this.props.startGame} bsStyle="primary">Play Again!</MyButton>
+        </NavLink>
         <Title>HALL OF FAME</Title>
-          {
+        <PlayerContainer>
+        {
             this.props.players.map((player, index) => (
               <Player key={index}>
-                {`${player.name} ${player.level}`}
+                {`${index+1}. ${player.name} ${player.level}`}
               </Player>
             ))
           }
-          <NavLink to={'/board'}>
-            <MyButton onClick={this.props.startGame} bsStyle="primary">Play Again!</MyButton>
-          </NavLink>
+        </PlayerContainer>
       </Container>
     )
   }

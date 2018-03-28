@@ -10,17 +10,14 @@ import { getRandomColor, gameStatuses } from '../core/util'
 import { equals } from 'ramda'
 
 const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  padding: 0;
-  margin: auto;
-  margin-top: 5%;
+  padding: ${16 / 2}px;
+  width: 40%;
+  margin: 0 auto;
 
-  max-width: ${props => props.amount * 110}px;
-  max-height: 100%;
-  height: 100%;
-  width: 100%;
+  &:after
+    content: '';
+    clear: both;
+    display: block;
 `
 
 const LevelContainer = styled.h1`
@@ -45,7 +42,7 @@ class Board extends React.Component {
     const board = []
     board.push(<Tile key={0} winner={true} color={color}/>)
     for (let i = 1; i < Math.pow(this.props.currentLevel,2); i++) {
-        board.push(<Tile key={i} color={color} />)
+        board.push(<Tile currentLevel={this.props.currentLevel} key={i} color={color} />)
     }
     board.sort((a, b) => (0.5 - Math.random()))
     return board

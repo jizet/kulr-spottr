@@ -5,18 +5,23 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 
 const Container = styled.div`
-  background: ${props => props.color}!important;
-  width: 100px;
-  height: 100px;
-  margin: 2px;
-  border-radius: 3px;
+  width: calc(100% / ${props => props.currentLevel});
+  float: left;
+  position: relative;
+  padding-bottom: calc(100% / ${props => props.currentLevel});
+  
+`
 
-  line-height: 150px;
-  color: white;
-  font-weight: bold;
-  font-size: 3em;
-  text-align: center;
+const Content = styled.div`
+  width: calc(100% - ${16}px);
+  height: calc(100% - ${16}px);
+  margin: ${16 / 2}px;
+  padding: 16px;
+  position: absolute;
+  border-radius: 4px;
   opacity: ${props => props.winner ? '0.5' : '1'}
+  background: ${props => props.color};
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
 `
 
 class Tile extends Component {
@@ -24,9 +29,13 @@ class Tile extends Component {
     return (
       <Container 
         onClick={this.props.winner ? this.props.levelUp : this.props.finishGame} 
-        color={this.props.color}
-        winner={this.props.winner}
-      />
+        currentLevel={this.props.currentLevel}
+      >
+        <Content 
+          color={this.props.color}
+          winner={this.props.winner}
+        />
+      </Container>
     )
   }
 }

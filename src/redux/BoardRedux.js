@@ -6,7 +6,8 @@ import { isNil, isEmpty } from 'ramda'
 const { Types, Creators } = createActions({
   levelUp: [],
   finishGame: [],
-  startGame: []
+  startGame: [],
+  setDifficulty: ['difficulty']
 }, {prefix: 'BOARD_'})
 
 export const BoardTypes = Types
@@ -16,7 +17,8 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   currentLevel: 0,
-  gameStatus: 'waiting'
+  gameStatus: 'waiting',
+  difficulty: ''
 })
 /* ------------- Reducers ------------- */
 
@@ -24,6 +26,10 @@ function inc (x) { return x + 1 }
 
 export const startGame = (state) => {
   return isNil(state) || isEmpty(state) ? INITIAL_STATE : state.set('currentLevel', 1).set('gameStatus', 'playing')
+}
+
+export const setDifficulty = (state, payload) => {
+  return isNil(state) || isEmpty(state) ? INITIAL_STATE : state.set('difficulty', payload.difficulty)
 }
 
 export const levelUp = (state) => {
@@ -38,5 +44,6 @@ export const finishGame = (state) => {
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.LEVEL_UP]: levelUp,
   [Types.START_GAME]: startGame,
-  [Types.FINISH_GAME]: finishGame
+  [Types.FINISH_GAME]: finishGame,
+  [Types.SET_DIFFICULTY]: setDifficulty
 })

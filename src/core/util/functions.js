@@ -14,3 +14,9 @@ export const gameStatuses = {
   playing: 'playing',
   finished: 'finished'
 }
+
+export const gameDifficulties = {
+  easy: 20000,
+  medium: 15000,
+  hard: 10000
+}

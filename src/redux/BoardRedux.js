@@ -25,7 +25,6 @@ export const INITIAL_STATE = Immutable({
 function inc (x) { return x + 1 }
 
 export const startGame = (state) => {
-  console.log(state)
   return isNil(state) || isEmpty(state) ? INITIAL_STATE : state.set('currentLevel', 1).set('gameStatus', 'playing')
 }
 
